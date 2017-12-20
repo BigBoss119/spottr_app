@@ -1,0 +1,26 @@
+html
+	head
+		script(src="https://code.jquery.com/jquery-3.2.1.js"
+				integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+				crossorigin="anonymous")
+	title Profile
+	style
+		include pug.css
+	body
+		include navbar.pug
+
+		h1 Welcome: #{user.username} 
+			form(action="/images" method="POST" enctype="multipart/form-data")
+				input(type="file" placeholder="Upload Picture" name="file")
+				input(type="submit" placeholder="submit" name="submit")
+		p
+			a(href="/postmessage" class="links") Post a new message? 
+		h1 Messages
+		each message in messages
+			p  
+			br 
+			| Title: #{message.title}
+			br
+			| Message: #{message.message}
+			//- input(type="text" value/name="#{message.id}"")
+		
