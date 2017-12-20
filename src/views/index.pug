@@ -2,6 +2,9 @@ doctype html
 html
 	head
 		link(rel='stylesheet', href='/css/main.css', type='text/css')
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+		script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.js")
+		link(href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet")
 
 	title Welcome
 	style
@@ -24,3 +27,38 @@ html
 
 
 	include footer.pug
+
+
+
+
+	script.
+		$(document).ready(function() {
+			console.log ("Ready")
+			var timeOut = Date.now()
+			$("#autocomplete").keyup(function() { 
+			if (Date.now()-timeOut >=300){
+				timeOut =Date.now()
+				var peter = $("#autocomplete").val()
+				if (peter.length > 0 ) {
+				console.log("peterrrr:" + peter)
+				$.ajax({
+					type: "POST",
+					url: "/search",
+					data: {searchData: peter},
+					dataType: "json",
+					success: function(result){
+
+					$( "#autocomplete" ).autocomplete({
+
+						source: result.search
+					});
+						console.log("The Result", result)
+					},
+					error: function(err){
+						console.log(err)
+					}
+
+				})}
+
+			}})
+		})
