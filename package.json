@@ -1,0 +1,29 @@
+{
+  "name": "spottr_app",
+  "version": "1.0.0",
+  "description": "collaboration project w/ ux/ui designers",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BigBoss119/spottr_app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BigBoss119/spottr_app/issues"
+  },
+  "homepage": "https://github.com/BigBoss119/spottr_app#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "pg": "^7.4.0",
+    "pug": "^2.0.0-rc.4",
+    "sequelize": "^4.28.5",
+    "sql-template-strings": "^2.2.2"
+  }
+}

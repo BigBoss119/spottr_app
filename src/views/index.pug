@@ -1,0 +1,26 @@
+doctype html
+html
+	head
+		link(rel='stylesheet', href='/css/main.css', type='text/css')
+
+	title Welcome
+	style
+	style(type='text/css').
+	body
+		include header.pug
+
+	div
+		
+		div(class='hBlock') 
+			form(method='POST' action='/dropMessage' class='formField')
+				
+				img(src="/../img/texthomepage.png" id="texthp")
+
+				input(type='text' id='searchBar' name='title' value='Where do you want to meet up?')
+				//- input(type='submit' value='Submit' style='margin:15px 0px 25px 0px;')
+				p(id='slogan') Because memories are made together.
+
+	img(src="/../img/worldmap.png" id="wmap")
+
+
+	include footer.pug
