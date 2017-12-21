@@ -9,17 +9,36 @@ html
 	title Welcome
 	style
 	style(type='text/css').
+		.ui-autocomplete {
+			width:20%;
+			position: relative;
+			top: 0;
+			left: 0;
+			cursor: default;
+			max-height: 95px; 
+			overflow-y: scroll; 
+			overflow-x: hidden;
+		}
+		
+		.ui-state-active,
+		.ui-widget-content .ui-state-active,
+		.ui-widget-header .ui-state-active {
+			border: 3px solid #57C26C;
+			font-weight: bold;
+			color: grey ;
+		}
+
 	body
 		include header.pug
 
 	div
 		
 		div(class='hBlock') 
-			form(method='POST' action='/dropMessage' class='formField')
+			form(method='POST' action='/searchCity' class='formField')
 				
 				img(src="/../img/texthomepage.png" id="texthp")
 
-				input(type='text' id='searchBar' name='title' value='Where do you want to meet up?')
+				input(type='text' id='searchBar' name='title' placeholder='Where do you want to meet up?')
 				//- input(type='submit' value='Submit' style='margin:15px 0px 25px 0px;')
 				p(id='slogan') Because memories are made together.
 
@@ -35,25 +54,23 @@ html
 		$(document).ready(function() {
 			console.log ("Ready")
 			var timeOut = Date.now()
-			$("#autocomplete").keyup(function() { 
-			if (Date.now()-timeOut >=300){
+			$("#searchBar").keyup(function() { 
+			if (Date.now()-timeOut >=400){
 				timeOut =Date.now()
-				var peter = $("#autocomplete").val()
+				var peter = $("#searchBar").val()
 				if (peter.length > 0 ) {
-				console.log("peterrrr:" + peter)
+				console.log("It works:" + peter)
 				$.ajax({
 					type: "POST",
-					url: "/search",
+					url: "/",
 					data: {searchData: peter},
 					dataType: "json",
 					success: function(result){
 
-					$( "#autocomplete" ).autocomplete({
+					$( "#searchBar" ).autocomplete({
 
 						source: result.search
-					});
-						console.log("The Result", result)
-					},
+					})},
 					error: function(err){
 						console.log(err)
 					}
