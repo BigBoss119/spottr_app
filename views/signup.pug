@@ -10,21 +10,13 @@ html
 		include navbar.pug
 		h1 Welcome, new user. 
 		h2 Please sign up to send a message:
-		form(class="forms" method="POST" action="/signup")
-			br
-			|
+		form(class="forms" method="POST" action="/user/signup")
 			p Enter a Username: 
 			input(type="text" placeholder="Username" name="username")
-			br
-			|
 			p Enter an email address: 
 			input(type="text" placeholder="Email" name="email")
-			br
-			|
 			p Enter a password: 
 			input(type="password" placeholder="Password" id="password" name="password")
-			br
-			|
 			p Confirm password: 
 			input(type="password" placeholder="Confirm password" id="password2" name="password2")
 			br

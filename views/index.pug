@@ -15,10 +15,10 @@ html
 			ul
 				li.nav
 					if (!user)
-						a(href="/login" class="links") Log in
+						a(href="/user/login" class="links") Log in
 				li.nav
 					if (!user)
-						a(href="/signup" class="links") Sign up
+						a(href="/user/signup" class="links") Sign up
 				li.nav
 					if (user)
-						a(href="/logout" class="links") Log out
+						a(href="/user/logout" class="links") Log out

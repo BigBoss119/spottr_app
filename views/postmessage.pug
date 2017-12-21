@@ -7,7 +7,7 @@ html
 			include navbar.pug
 			h1 Welcome: #{user.username}
 			h1 What is your message:
-			form(class="forms" method="POST" action="/postmessage")
+			form(class="forms" method="POST" action="/event/postmessage")
 				input(type="text" placeholder="Title" name="title") 
 				br
 				br
