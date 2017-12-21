@@ -136,7 +136,7 @@ router.get("/profile", (req, res) => {
 router.post("/logout", function (req, res) {
   req.session.destroy();
   console.log("Logged Out")
-  res.render('index');
+  res.redirect('/index');
 });
 
 module.exports = router;
