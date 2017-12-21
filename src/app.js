@@ -36,6 +36,34 @@ app.get("/footer", (request, response) => {
     response.render("footer", {});
     });
 
+//searchbar
+
+app.post("/", (request, response) => {
+    console.log("at the post office")
+    fs.readFile('cities.json', function(err, data) {
+        if (err) {
+            throw err;
+        }
+        var userList = JSON.parse(data)
+        var allContent = request.body.searchData
+        var usersSug = []
+        debugger
+        for (var i = 0; i < userList.length; i++){
+            if (allContent.toLowerCase() === userList[i].name.slice(0, allContent.length).toLowerCase() || allContent.toLowerCase() === userList[i].country.slice(0, allContent.length).toLowerCase()){
+                usersSug.push(userList[i].name + ", " + userList[i].country
+                )
+                console.log("User found")
+            }
+            console.log(userList[i].name)
+        } 
+        debugger
+        console.log("The suggestions:", usersSug)
+        response.json({status:200, search: usersSug})
+        // response.status(200).send({search: usersSug})
+});
+})
+
+
 
 //cities
 
