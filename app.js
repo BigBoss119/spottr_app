@@ -8,6 +8,7 @@ const Client = pg.Client //this is needed to use postgres
 const multer = require("multer")
 const session = require('express-session')
 var upload = multer({dest: 'images/'})
+const SQL = require('sql-template-strings');
 const client = new Client({ //this locates the server on the computer
     user: process.env.user,
     host: 'localhost',
@@ -19,6 +20,7 @@ const client = new Client({ //this locates the server on the computer
 const usersRoutes = require('./routes/usersRoutes') /*route connecting to the users module*/
 const events = require('./routes/events')/*route connecting to the events module*/
 
+app.use(express.static('public'))
 
 app.use(session({
     secret: 'secret-session',

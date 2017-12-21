@@ -1,24 +1,59 @@
 html
 	head
-		script(src="https://code.jquery.com/jquery-3.2.1.js"
-				integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-				crossorigin="anonymous")
-	title Home	
-	style
-		include pug.css
-	body
-		include navbar.pug
+		//- link(rel='stylesheet', href='/main.css', type='text/css')
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+		script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.js")
+		link(href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet")
 
-		h1 Welcome
-		h3 Log in to see the messages
-		p
-			ul
-				li.nav
-					if (!user)
-						a(href="/user/login" class="links") Log in
-				li.nav
-					if (!user)
-						a(href="/user/signup" class="links") Sign up
-				li.nav
-					if (user)
-						a(href="/user/logout" class="links") Log out
+	title SPOTT'R
+	style
+		include main.css
+	body
+		include header.pug
+
+	div
+		div(class='hBlock') 
+			form(method='POST' action='/dropMessage' class='formField')
+				img(src="images/texthomepage.png" id="texthp")
+				input(type='text' id='searchBar' name='title' value='Where do you want to meet up?')
+				//- input(type='submit' value='Submit' style='margin:15px 0px 25px 0px;')
+				p(id='slogan') Because memories are made together.
+			img(src="images/worldmap.png" id="wmap")
+
+
+	include footer.pug
+
+
+
+
+	script.
+		$(document).ready(function() {
+			console.log ("Ready")
+			var timeOut = Date.now()
+			$("#autocomplete").keyup(function() { 
+			if (Date.now()-timeOut >=300){
+				timeOut =Date.now()
+				var peter = $("#autocomplete").val()
+				if (peter.length > 0 ) {
+				console.log("peterrrr:" + peter)
+				$.ajax({
+					type: "POST",
+					url: "/search",
+					data: {searchData: peter},
+					dataType: "json",
+					success: function(result){
+
+					$( "#autocomplete" ).autocomplete({
+
+						source: result.search
+					});
+						console.log("The Result", result)
+					},
+					error: function(err){
+						console.log(err)
+					}
+
+				})}
+
+			}})
+		})

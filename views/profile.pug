@@ -5,9 +5,9 @@ html
 				crossorigin="anonymous")
 	title Profile
 	style
-		include pug.css
+		include main.css
 	body
-		include navbar.pug
+		include header.pug
 
 		h1 Welcome: #{user.username} 
 			form(action="/images" method="POST" enctype="multipart/form-data")
@@ -23,4 +23,5 @@ html
 			br
 			| Message: #{message.message}
 			//- input(type="text" value/name="#{message.id}"")
-		
+
+		include footer.pug		
