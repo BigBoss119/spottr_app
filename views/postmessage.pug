@@ -2,12 +2,12 @@ html
 	head
 		title Post your message
 		style
-			include pug.css
+			include main.css
 		body
-			include navbar.pug
+			include header.pug
 			h1 Welcome: #{user.username}
 			h1 What is your message:
-			form(class="forms" method="POST" action="/postmessage")
+			form(class="forms" method="POST" action="/event/postmessage")
 				input(type="text" placeholder="Title" name="title") 
 				br
 				br
@@ -15,3 +15,5 @@ html
 				br
 				br
 				input(type="submit" value="send!")
+
+			include footer.pug

@@ -2,11 +2,11 @@ html
 	head
 		title Login
 		style
-			include pug.css
+			include main.css
 		body
-			include navbar.pug
+			include header.pug
 			h1 Log in to see the posts.
-			form(class="forms" method="POST" action="/login")
+			form(class="forms" method="POST" action="/user/login")
 				br
 				|
 				input(type="text" placeholder="username" name="username") 
@@ -15,3 +15,4 @@ html
 				input(type="password" placeholder="password" name="password")
 				br
 				input(type="submit" value="Login!")
+			include footer.pug

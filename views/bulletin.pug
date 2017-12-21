@@ -6,13 +6,13 @@ html
 				crossorigin="anonymous")
 	title Blog
 	style
-		include pug.css
+		include main.css
 	body
-		include navbar.pug
+		include header.pug
 
 		h1 Welcome: #{user.username}
 		p
-			a(href="/postmessage" class="links") Post a new message? 
+			a(href="/event/postmessage" class="links") Post a new message? 
 		h1 Messages
 		each message in messages
 			p  

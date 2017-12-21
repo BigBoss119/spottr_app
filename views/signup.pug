@@ -3,32 +3,26 @@ html
 		script(src="https://code.jquery.com/jquery-3.2.1.js"
 				integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
 				crossorigin="anonymous")
-	title signup
+	title Signup
 	style
-		include pug.css
+		include main.css
 	body
-		include navbar.pug
+		include header.pug
 		h1 Welcome, new user. 
 		h2 Please sign up to send a message:
-		form(class="forms" method="POST" action="/signup")
-			br
-			|
+		form(class="forms" method="POST" action="/user/signup")
 			p Enter a Username: 
 			input(type="text" placeholder="Username" name="username")
-			br
-			|
 			p Enter an email address: 
 			input(type="text" placeholder="Email" name="email")
-			br
-			|
 			p Enter a password: 
 			input(type="password" placeholder="Password" id="password" name="password")
-			br
-			|
 			p Confirm password: 
 			input(type="password" placeholder="Confirm password" id="password2" name="password2")
 			br
 			input(type="submit" value="Signup!")
+
+		include footer.pug
 		script.
 			$(document).ready(function() {
 				$(".forms").submit(function(event){
