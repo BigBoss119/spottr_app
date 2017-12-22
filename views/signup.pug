@@ -1,15 +1,40 @@
 html
 	head
+		link(rel='stylesheet', href='/css/main.css', type='text/css')
 		script(src="https://code.jquery.com/jquery-3.2.1.js"
 				integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
 				crossorigin="anonymous")
 	title Signup
-	style
-		include main.css
+	style(type='text/css').
+		input{
+			padding: 5px 10px 5px 10px;
+			margin: 5px 0px 15px 0px;
+			width: 75%;
+		}
+
+		p{
+			text-align:left;
+		}
+
+		h3{
+		padding: 20px 0px 20px 150px;
+		}
+
+		.forms{
+			text-align:center;
+			max-width: 350px;
+			display: block;
+			margin: 0 auto;
+		}
+
+		#send{
+			width:30%;
+		}
+
 	body
 		include header.pug
 		h1 Welcome, new user. 
-		h2 Please sign up to send a message:
+		h3 Please sign up to send a message:
 		form(class="forms" method="POST" action="/user/signup")
 			p Enter a Username: 
 			input(type="text" placeholder="Username" name="username")
@@ -20,7 +45,7 @@ html
 			p Confirm password: 
 			input(type="password" placeholder="Confirm password" id="password2" name="password2")
 			br
-			input(type="submit" value="Signup!")
+			input(type="submit" id="send" value="Signup!")
 
 		include footer.pug
 		script.

@@ -1,9 +1,9 @@
 html
 	head
+		link(rel='stylesheet', href='/css/main.css', type='text/css')
 
 	title Welcome
 	style
-		include main.css
 
 	body
 		footer(class="footer")
@@ -17,10 +17,8 @@ html
 
 			ul(class="ftext")
 				h2 PROFILE
-				li(href='/') Login
-				li(href="view") Sign up
-				li
-				li
+				li(href="/user/login") Login
+				li(href="/user/signup") Sign up
 
 			ul(class="ftext")
 				h2 CONTACT
@@ -31,9 +29,6 @@ html
 			ul(class="ftext")
 				H2 SOCIAL
 				li(href="view") 
-				img(src="/images/twitter.png" id="social" href='/sdfsdf')
-				img(src="/images/facebook.png" id="social" href='/sdfs')
-				img(src="/images/instagram.png" id="social" href='/no')
-
-
-				//- img(src="/../img/social media.png" id="logo")
+				img(src="/images/twitter.png" id="social" href='www.twitter.com')
+				img(src="/images/facebook.png" id="social" href='www.facebook.com')
+				img(src="/images/instagram.png" id="social" href='www.instagram.com')

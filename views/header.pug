@@ -1,35 +1,36 @@
-div(class="navbar")
-	nav
-		ul
-			img(src="images/logo.png" id="logo")
-			li
-				a(href="/" class="links") Home
-			li
-				if (user)
-					a(href="/user/profile") #{user.username}
-			li
-				if (!user)
-					a(href="/user/signup") Sign Up!
-			li
-				if (!user)
-					a(href="/user/login") Log in
-			li
-				if (user)
-					a(href="/event/bulletin") See all Events
-			li
-				if (user)
-					a(href="/event/postmessage") Create an event
-			img(src="images/user.png" id="userid")
-			li
-				if (user)
-					form(class="forms" method="POST" action="/user/logout")
-						button(type='submit') Logout
+doctype html
+html
+	head
+		link(rel='stylesheet', href='/css/main.css', type='text/css')
 
+	title Welcome
+	style(type='text/css').
 
-
-//- nav
-//- 			ul
-				
-//- 				a(href='/') About
-//- 				a(href="view") How it works
-			
+	body
+		img(src="/images/logo.png" id="logo")
+		div(class="navbar")
+		nav
+			ul
+				//- img(src="images/logo.png" id="logo")
+				li
+					a(href="/" class="links") Home
+				li
+					if (user)
+						a(href="/user/profile") #{user.username}
+				li
+					if (!user)
+						a(href="/user/signup") Sign Up!
+				li
+					if (!user)
+						a(href="/user/login") Log in
+				li
+					if (user)
+						a(href="/event/bulletin") See all Events
+				li
+					if (user)
+						a(href="/event/postmessage") Create an event
+				img(src="/images/user.png" id="userid")
+				li
+					if (user)
+						form(class="forms" method="POST" action="/user/logout")
+							button(type='submit') Logout
