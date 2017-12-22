@@ -1,0 +1,115 @@
+html
+	head
+		link(rel='stylesheet', href='/css/main.css', type='text/css')
+		link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css")
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js")
+		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ")
+
+		title Post your message
+		style(type='text/css').
+			//- .forms{
+			//- 	text-align: center !important;
+			//- }
+
+			//- #titleA{
+			//-     width: 50%;
+			//-     height: 10%;
+			//-     padding-left: 15px;
+			//-     font-size: 20px;
+			//-     font-family:avenir;
+			//-     	}
+
+			//- #textA{
+			//- 	width: 50%;
+			//- 	height: 40%;
+			//- 	padding-left: 15px;
+			//- 	font-size: 20px;
+			//- 	font-family:avenir;
+			//- }
+			//- #yourMessage{
+			//- 	text-align:center;
+			//- 	padding-top:30px;
+			//- }
+
+			.eventList{
+				background-color: #F2F2F2;
+				margin-top: 50px;
+				//- display: -webkit-box;
+			}
+
+			.columnOne{
+			padding-top:60px;
+			width: 45%;
+			//- float: left;
+			}
+
+			.columnTwo{
+			padding-top:60px;
+			width: 45%;
+			//- float: left;
+
+			}
+
+			#create{
+				text-align: right;
+				width: 98%;
+			}
+
+			#cimg{
+				padding: 20px 149px 0px 0px;
+				width: 50px;
+			}
+
+			#req{
+				margin-top:-35px;
+			}
+
+			.cell{
+				max-width: 50px;
+			}
+
+			.photo{
+				max-width:300px;
+				max-height:200px;
+				padding: 0px 0px 100px 0px;
+			}
+
+			.clear{
+				clear:left;
+			}
+
+
+		body
+
+			div(id="create")
+				li
+					img(src="/images/create.png" id="cimg")
+					p(id="req") Create new request 
+
+			div(class="eventList")
+				div(class="columnOne")
+					p BUDD'S, <Location>
+
+					div(class="cell")
+						img(src="/images/1.jpg" class="photo")
+					div(class="cell")
+						img(src="/images/2.jpg" class="photo")
+					div(class="cell")
+						img(src="/images/3.jpg" class="photo")
+					div(class="cell")
+						img(src="/images/4.jpg" class="photo")
+
+				div(class="columnTwo")
+					p NEWS FEED, <Location>
+					div(class="cell")
+						img(src="/images/1.jpg" class="photo")
+					div(class="cell")
+						img(src="/images/1.jpg" class="photo")
+					div(class="cell")
+						img(src="/images/1.jpg" class="photo")
+					div(class="cell")
+						img(src="/images/1.jpg" class="photo")
+				div(class="clear")
+
+			include footer.pug

@@ -33,6 +33,11 @@ app.use(session({
 }));
 
 
+app.get("/eventlist", (request, response) => {
+    response.render("eventlist", {});
+    });
+
+
 app.set('view engine', 'pug')//tells that the file its reading its in pug form
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));

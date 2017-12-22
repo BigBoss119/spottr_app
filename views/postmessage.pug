@@ -1,17 +1,41 @@
 html
 	head
+		link(rel='stylesheet', href='/css/main.css', type='text/css')
 		title Post your message
-		style
-			include main.css
+		style(type='text/css').
+			.forms{
+				text-align: center !important;
+			}
+
+			#titleA{
+			    width: 50%;
+			    height: 10%;
+			    padding-left: 15px;
+			    font-size: 20px;
+			    font-family:avenir;
+			    	}
+
+			#textA{
+				width: 50%;
+				height: 40%;
+				padding-left: 15px;
+				font-size: 20px;
+				font-family:avenir;
+			}
+			#yourMessage{
+				text-align:center;
+				padding-top:30px;
+			}
+
 		body
 			include header.pug
 			h1 Welcome: #{user.username}
-			h1 What is your message:
+			h2#yourMessage What is your message:
 			form(class="forms" method="POST" action="/event/postmessage")
-				input(type="text" placeholder="Title" name="title") 
+				input(type="text" placeholder="Title" name="title" id="titleA") 
 				br
 				br
-				textarea(row="10" column="25" type="text" placeholder="Message" name="message")
+				textarea(row="10" column="25" type="text" placeholder="Message" name="message" id="textA")
 				br
 				br
 				input(type="submit" value="send!")

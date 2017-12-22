@@ -1,25 +1,61 @@
 html
 	head
+		link(rel='stylesheet', href='/css/main.css', type='text/css')
 		script(type="text/javascript" src="index.js")
 		script(src="https://code.jquery.com/jquery-3.2.1.js"
 				integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
 				crossorigin="anonymous")
 	title Blog
-	style
-		include main.css
+	style(type='text/css').
+		p{
+			text-align: center !important;
+		}
+
+		#new{
+			padding: 5px 50px 5px 50px;
+			border: 5px dotted #4E6D56;
+		}
+
+		.title{
+			display: block;
+			text-align: center;
+			width: 35%;
+		    padding: 45px 1px 10px 19px;
+		    //- border: 1px solid;
+		}
+
+		.message{
+			display: block;
+			width: 37%;
+			padding: 10px 0px 40px 0px;
+			border: 1px solid;	
+		}
+
+		.tOne{
+			padding-top:6%;
+		}
+
+		.fnav{
+		    margin: 180px -20px -25px -70px!important;
+		}
+
+		
 	body
 		include header.pug
 
 		h1 Welcome: #{user.username}
 		p
-			a(href="/event/postmessage" class="links") Post a new message? 
-		h1 Messages
+			a(href="/event/postmessage" class="links" id="new") Post a new message? 
+		h1.tOne Messages
 		each message in messages
-			p  
-			br 
-			| Title: #{message.title}
-			br
-			| Message: #{message.message}   
+			p
+			div.blog  
+			ul.title 
+				p Title: #{message.title}
+			ul.message
+				p Message: #{message.message}   
+
+		include footer.pug
 
 		//- 	#HCB_comment_box
 		
