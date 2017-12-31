@@ -33,16 +33,16 @@ app.use(session({
 }));
 
 
-app.get("/eventlist", (request, response) => {
-    response.render("eventlist", {});
+app.get("/eventlist", (req, res) => {
+    res.render("eventlist", {});
     });
 
 
 app.set('view engine', 'pug')//tells that the file its reading its in pug form
-app.set('views', __dirname + '/views');
-app.use(express.static(__dirname + '/public'));
+app.set('views', __dirname + '/views');// this is where all the routes are
+app.use(express.static(__dirname + '/public')); //this is for all the images and css files
 
-// app.use(express.static('public'))
+
 app.use('/', bodyParser.urlencoded({ extended: true }));
 
 
@@ -52,28 +52,28 @@ client.connect()//this connects to the server
 /*--------Searchbar---------*/
 
 app.post("/", (request, response) => {
-    console.log("at the post office")
     fs.readFile('cities.json', function(err, data) {
         if (err) {
             throw err;
         }
-        var userList = JSON.parse(data)
+        var cityList = JSON.parse(data)
+        console.log("JSON data: ", data)
         var allContent = request.body.searchData
+        console.log("searchData: ", allContent)
         var usersSug = []
         debugger
-        for (var i = 0; i < userList.length; i++){
-            if (allContent.toLowerCase() === userList[i].name.slice(0, allContent.length).toLowerCase() || allContent.toLowerCase() === userList[i].country.slice(0, allContent.length).toLowerCase()){
-                usersSug.push(userList[i].name + ", " + userList[i].country
-                )
-                console.log("User found")
+        for (var i = 0; i < cityList.length; i++) {
+            if (allContent.toLowerCase() === cityList[i].name.slice(0, allContent.length).toLowerCase() || allContent.toLowerCase() === cityList[i].country.slice(0, allContent.length).toLowerCase()) {
+                usersSug.push(cityList[i].name + ", " + cityList[i].country)
             }
-            console.log(userList[i].name)
-        } 
+        }
+        console.log("im here")
+
         debugger
-        console.log("The suggestions:", usersSug)
-        response.json({status:200, search: usersSug})
+        // console.log("The suggestions:", usersSug)
+        response.json({ status: 200, search: usersSug })
         // response.status(200).send({search: usersSug})
-});
+    });
 })
 
 
@@ -84,12 +84,17 @@ app.use('/event', events)
 /*--------------gets the list from Shell to index--------*/
 app.get("/", (req, res) => {
     const readquery = {
-        text: `select * from messages;`
+        text: `select * from activities;`
     }
     client.query(readquery, function(err, response) {
-        var message = response.rows
-        // console.log(message)
-        res.render('index', {user: req.session.user, message: message })
+        /*not needed in 'get'
+            only after location is typed in, it should load with ajax/jquery*/
+        var activity = response.rows
+        console.log("reached")
+        res.render('index', {
+            user: req.session.user,
+            activity: activity
+        })
     })
 })
 
@@ -108,7 +113,7 @@ app.get("/", (req, res) => {
 
 /*--------connect to your localhost---------*/
 app.listen(3000, function() {
-    console.log("App on port 3000")
+    console.log("Yuurrr")
 })
 
 module.exports = client;

@@ -16,7 +16,8 @@ html
 					a(href="/" class="links") Home
 				li
 					if (user)
-						a(href="/user/profile") #{user.username}
+						a(href="/user/profile")
+							img(src="/images/user.png" id="userid")
 				li
 					if (!user)
 						a(href="/user/signup") Sign Up!
@@ -25,11 +26,11 @@ html
 						a(href="/user/login") Log in
 				li
 					if (user)
-						a(href="/event/bulletin") See all Events
+						a(href="/event/activityList") See all Events
 				li
 					if (user)
-						a(href="/event/postmessage") Create an event
-				img(src="/images/user.png" id="userid")
+						a(href="/event/createActivity") Create an event
+				
 				li
 					if (user)
 						form(class="forms" method="POST" action="/user/logout")

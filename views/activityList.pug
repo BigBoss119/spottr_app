@@ -5,7 +5,7 @@ html
 		script(src="https://code.jquery.com/jquery-3.2.1.js"
 				integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
 				crossorigin="anonymous")
-	title Blog
+	title Activities
 	style(type='text/css').
 		p{
 			text-align: center !important;
@@ -45,15 +45,17 @@ html
 
 		h1 Welcome: #{user.username}
 		p
-			a(href="/event/postmessage" class="links" id="new") Post a new message? 
-		h1.tOne Messages
-		each message in messages
+			a(href="/event/createActivity" class="links" id="new") Create a new activity? 
+		h1.tOne Activities
+		each activity in activity
 			p
 			div.blog  
 			ul.title 
-				p Title: #{message.title}
+				p #{activity.activity}
 			ul.message
-				p Message: #{message.message}   
+				p #{activity.description} 
+				p #{activity.meetpoint}
+				p #{activity.date} 
 
 		include footer.pug
 

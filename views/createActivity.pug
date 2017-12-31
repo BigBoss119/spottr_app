@@ -1,0 +1,65 @@
+html
+	head
+		link(rel='stylesheet', href='/css/main.css', type='text/css')
+		title Create activity
+		style(type='text/css').
+			.forms{
+				text-align: center !important;
+			}
+
+			#createActivity{
+			    width: 50%;
+			    height: 10%;
+			    padding-left: 15px;
+			    font-size: 20px;
+			    font-family:avenir;
+			    	}
+
+			#textA{
+				width: 50%;
+				height: 40%;
+				padding-left: 15px;
+				font-size: 20px;
+				font-family:avenir;
+			}
+			#yourActivity{
+				text-align:center;
+				padding-top:30px;
+			}
+
+		body
+			include header.pug
+			h1 Welcome: #{user.username}
+			h2#yourActivity Create Activity: 
+			form(class="forms" method="POST" action="/event/createActivity")
+				|Choose City:
+				input(type="text" placeholder="City" name="city" id="createActivity")
+				br
+				br
+				| Activity Title:
+				input(type="text" placeholder="Activity" name="activity" id="createActivity") 
+				br
+				br
+				p
+				|Meetpoint:
+				textarea(row="7" column="15" type="text" placeholder="Meetpoint" name="meetpoint" id="createActivity")
+				br
+				br
+				p
+				|What is the activity:
+				textarea(row="10" column="25" type="text" placeholder="Description" name="description" id="createActivity")
+				br
+				br
+				p
+				|Choose a date:
+				input(type="date" name="date" id="createActivity")
+				br
+				br
+				p
+				|Choose the time:
+				input(type="time" name="time" id="createActivity")
+				br
+				br
+				input(type="submit" value="send!")
+
+			include footer.pug

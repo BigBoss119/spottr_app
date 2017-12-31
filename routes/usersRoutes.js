@@ -78,10 +78,11 @@ router.get("/login", (req, res) => {
 
 router.post("/login", (req, res) => {
     var username = req.body.username
-    // var email = req.body.email.toLowerCase() /*case insensitive*/
-    // var password = req.body.password
     const loginQuery = {
-        text: ` SELECT * FROM users WHERE username = '${username}';`
+        text: ` SELECT * FROM users WHERE username = '${username}',
+        (SELECT * FROM activities WHERE users.id FROM users = '${req.session.user.username}');`
+
+       // SELECT * FROM activities WHERE user_id = users.user_id
     } 
     
     client.query(loginQuery, function (err, response) {
@@ -96,8 +97,10 @@ router.post("/login", (req, res) => {
                         username:  response.rows[0].username,
                         id: response.rows[0].id
                         } 
-                        console.log(req.session.user)
-                    res.redirect('/user/profile')
+                        console.log(req.session.user.username)
+                    res.render('activityList', {
+                        user:req.session.user
+                    })
                 } else {
                     res.send("Wrong password")
                 }
@@ -110,19 +113,19 @@ router.post("/login", (req, res) => {
 
 router.get("/profile", (req, res) => {
     console.log("This is: ", req.session.user)
-    console.log(req.session.user.id)
+    console.log("User_id: ", req.session.user.id)
     const profileQuery = {
-        text: `Select messages.title, messages.message FROM messages WHERE messages.user_id = ${req.session.user.id}`
+    //     text: `Select messages.title, messages.message FROM messages WHERE messages.user_id = ${req.session.user.id}`
     } 
     
     if(req.session.user) {
         client.query(profileQuery, function (err, response) {
             if(err) throw err;
-            var messages = response.rows
-            console.log(messages)
+            var activity = response.rows
+            console.log(activity)
             res.render('profile', {
                 user:req.session.user,
-                messages:messages
+                activity: activity
             })
         })
     } 
@@ -136,7 +139,7 @@ router.get("/profile", (req, res) => {
 router.post("/logout", function (req, res) {
   req.session.destroy();
   console.log("Logged Out")
-  res.redirect('/index');
+  res.redirect('/');
 });
 
 module.exports = router;
