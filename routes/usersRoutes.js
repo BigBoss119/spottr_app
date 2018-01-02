@@ -91,14 +91,15 @@ router.post("/login", (req, res) => {
             res.redirect('/user/signup')
         } else {
             bcrypt.compare(req.body.password /*the typed password*/, response.rows[0].password /*password in DB*/, function(err, result) {
+                var activities = response.rows
                 if(err) throw err
                 if (result == true) {
                     req.session.user = {
                         username:  response.rows[0].username,
                         id: response.rows[0].id
                         } 
-                        console.log(req.session.user.username)
-                    res.render('activityList', {
+                        console.log("this is activity: ")
+                    res.render('profile', {
                         user:req.session.user
                     })
                 } else {
@@ -121,11 +122,11 @@ router.get("/profile", (req, res) => {
     if(req.session.user) {
         client.query(profileQuery, function (err, response) {
             if(err) throw err;
-            var activity = response.rows
-            console.log(activity)
+            var activities = response.rows
+            console.log(activities)
             res.render('profile', {
                 user:req.session.user,
-                activity: activity
+                activities: activities
             })
         })
     } 

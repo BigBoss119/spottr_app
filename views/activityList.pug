@@ -47,15 +47,18 @@ html
 		p
 			a(href="/event/createActivity" class="links" id="new") Create a new activity? 
 		h1.tOne Activities
-		each activity in activity
+		each activities in activities
 			p
 			div.blog  
 			ul.title 
-				p #{activity.activity}
+				p #{activities.activity}
 			ul.message
-				p #{activity.description} 
-				p #{activity.meetpoint}
-				p #{activity.date} 
+				p #{activities.city}
+				p #{activities.description} 
+				p #{activities.meetpoint}
+				p #{activities.date} 
+				p #{activities.time}
+
 
 		include footer.pug
 

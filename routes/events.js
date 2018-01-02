@@ -31,6 +31,7 @@ router.post("/createActivity", (req, res) => {
     var date = req.body.date
     var time = req.body.time
     var city = req.body.city
+    console.log(req.session.user.username)
     const insertquery = {
         text: `INSERT INTO activities (activity, meetpoint, description, date, time, city, user_id) 
         values 
@@ -65,10 +66,11 @@ router.post("/activityList", (req, res) => {
     if(req.session.user) {
         client.query(messageQuery, function (err, response) {
             if (err) throw err;
-            var activity = response.rows
+            var activities = response.rows
+            console.log("activities: ", activities)
             res.render('activityList', {
                 user:req.session.user,
-                activity: activities
+                activities: activities
             })
         })    
         
