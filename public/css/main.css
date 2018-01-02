@@ -5,6 +5,11 @@
     src: url(BNRegular.ttf);
 }
 
+@font-face {
+    font-family: avenir;
+    src: url(Avenir.ttc);
+}
+
 /*Header*/
 
 body{
@@ -12,6 +17,7 @@ body{
   background-attachment: fixed;
   position: relative;
   font-family: avenir;
+  margin:0;
 }
 
 button{
@@ -73,13 +79,14 @@ a{
 
 #logo{
   /*background-image: url('/images/logo.png');*/
-  width: 15%;
+  width: 11%;
   float: left;
 }
 
 #userid{
   width: 50px;
-  padding: 15px 25px 0px 0px;
+  padding: 0px 25px 0px 0px;
+  margin-top: -15px; 
 }
 
 .dropdown {
@@ -153,13 +160,15 @@ a{
 
 .footer{
   background-color: #4E6D56;
-  position: relative;
+  position: absolute;
+  bottom: 0px;
 }
 
 .fnav{
   background-color: #4E6D56;
-  position: relative;
-  left: 0px;
+/*  position: absolute;
+  bottom: -10vw;*/
+  left: 0;
   width: -webkit-fill-available;
   text-align: center;
   margin: 60px -20px -25px -70px;

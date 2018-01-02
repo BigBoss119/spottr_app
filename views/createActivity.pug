@@ -3,16 +3,35 @@ html
 		link(rel='stylesheet', href='/css/main.css', type='text/css')
 		title Create activity
 		style(type='text/css').
+			h2#yourActivity{
+				font-size:31px;
+			}
+			p{
+				text-align:left;
+				padding:10px 0 20px 23%;
+			}
+
 			.forms{
 				text-align: center !important;
 			}
 
+			#createForm{
+				display: block;
+				align-content: center;
+				margin: 0px 0 0 25%;
+				width: 50%;
+				padding-top:150px;
+			}
+
 			#createActivity{
 			    width: 50%;
-			    height: 10%;
+			    height: 5%;
 			    padding-left: 15px;
 			    font-size: 20px;
 			    font-family:avenir;
+			    margin-left:20px;
+			    min-height:40px;
+			    border: 2px solid #57C26C
 			    	}
 
 			#textA{
@@ -22,41 +41,34 @@ html
 				font-size: 20px;
 				font-family:avenir;
 			}
-			#yourActivity{
-				text-align:center;
-				padding-top:30px;
-			}
 
 		body
 			include header.pug
 			//- h1 Welcome: #{user.username}
-			h2#yourActivity Create Activity: 
-			form(class="forms" method="POST" action="/event/createActivity")
-				|Choose City:
+			div(class='CEForm')
+			form(class="forms" id="createForm" method="POST" action="/event/createActivity")
+				h2#yourActivity Create Activity:
+				p Choose City:
 				input(type="text" placeholder="City" name="city" id="createActivity")
 				br
 				br
-				| Activity Title:
+				p Activity Title:
 				input(type="text" placeholder="Activity" name="activity" id="createActivity") 
 				br
 				br
-				p
-				|Meetpoint:
+				p Meetpoint:
 				textarea(row="7" column="15" type="text" placeholder="Meetpoint" name="meetpoint" id="createActivity")
 				br
 				br
-				p
-				|What is the activity:
+				p What is the activity:
 				textarea(row="10" column="25" type="text" placeholder="Description" name="description" id="createActivity")
 				br
 				br
-				p
-				|Choose a date:
+				p Choose a date:
 				input(type="date" name="date" id="createActivity")
 				br
 				br
-				p
-				|Choose the time:
+				p Choose the time:
 				input(type="time" name="time" id="createActivity")
 				br
 				br
