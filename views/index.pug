@@ -37,6 +37,7 @@ html
 				p(id='slogan') Because memories are made together.
 	img(src="images/worldmap.png" id="wmap")
 
+	div#search
 
 	include footer.pug
 
@@ -47,28 +48,48 @@ html
 		$(document).ready(function() {
 			console.log ("Ready")
 			var timeOut = Date.now()
-			$("#searchBar").keyup(function() { 
-			if (Date.now()-timeOut >=400){
+			if (true){
 				timeOut =Date.now()
+				$("#searchBar").keyup(function(e) {
+				console.log(e.which)
 				var peter = $("#searchBar").val()
-				if (peter.length > 0 ) {
-				console.log("It works:" + peter)
-				$.ajax({
-					type: "POST",
-					url: "/",
-					data: {searchData: peter},
-					dataType: "json",
-					success: function(result){
+				console.log(peter)
+				console.log("not Enter")
+					if (e.which == 13){
+						console.log("Press Enter" + e.which)
+						$.ajax({
+							type: "POST",
+							url:"/event/activityList",
+							data:  {searchData: peter},
+							success: function(result){
+								$.each(result, function(index, value){
+									$("#search").html(`<p>${value}<p>`)
+								})			
+							}	
+						})
+					}//if 13
+					else if (peter.length > 0) {
+						
+						console.log("It works:" + peter)
+						$.ajax({
+							type: "POST",
+							url: "/",
+							data: {searchData: peter},
+							dataType: "json",
+							success: function(result){
 
-					$( "#searchBar" ).autocomplete({
+								$( "#searchBar" ).autocomplete({
 
-						source: result.search
-					})},
-					error: function(err){
-						console.log(err)
-					}
+									source: result.search
+								})
+							},
+							error: function(err){
+								console.log(err)
+							}
 
-				})}
-
-			}})
-		})
+						})//ajax2
+					}//elseif
+				})//keyup
+			}//timeout
+		})	
+	

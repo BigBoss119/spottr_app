@@ -52,12 +52,12 @@ router.post("/createActivity", (req, res) => {
        // res.redirect('/user/profile')
         })
 })
-
+/*-----navbar---*/
 router.get("/activityList", (req, res) => {
     var search = req.session.search
-    console.log("searchData: ", search)
+    console.log("searchData3: ", search)
     const messageQuery = {
-        text: ` SELECT * FROM activities WHERE city = '${search}';`
+        text: `SELECT * FROM activities WHERE city = '${search}';`
     }
     // ('${allContent}')
     if(req.session.user) {
@@ -78,7 +78,7 @@ router.get("/activityList", (req, res) => {
 //         user:req.session.user
 //     })
 // })
-
+/*-----searchbar----*/
 router.post("/activityList", (req, res) => {
     var allContent = req.body.searchData
     req.session.search = allContent
@@ -91,12 +91,11 @@ router.post("/activityList", (req, res) => {
         client.query(messageQuery, function (err, response) {
             if (err) throw err;
             var activities = response.rows
+            console.log(allContent)
             console.log("activities: ", activities)
-            res.render('activityList', {
-                user:req.session.user,
-                search: req.session.search,
-                activities: activities
-            })
+            res.send(
+               activities
+            )
         })    
         
     }
