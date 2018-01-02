@@ -43,21 +43,24 @@ html
 	body
 		include header.pug
 
-		//- h1 Welcome: #{user.username}
+		h1 Welcome: #{user.username}
 		p
 			a(href="/event/createActivity" class="links" id="new") Create a new activity? 
 		h1.tOne Activities
-		each activities in activities
+		each item in activities
 			p
 			div.blog  
 			ul.title 
-				p #{activities.activity}
+				p #{item.activity}
 			ul.message
-				p #{activities.city}
-				p #{activities.description} 
-				p #{activities.meetpoint}
-				p #{activities.date} 
-				p #{activities.time}
+				p 
+				|#{item.city}
+				p 
+				|#{item.meetpoint}
+				p
+				| #{item.date} 
+				p
+				| #{item.time}
 
 
 		include footer.pug

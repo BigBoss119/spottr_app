@@ -59,7 +59,7 @@ app.post("/", (request, response) => {
         var cityList = JSON.parse(data)
         console.log("JSON data: ", data)
         var allContent = request.body.searchData
-        console.log("searchData: ", allContent)
+        console.log("searchData1: ", allContent)
         var usersSug = []
         debugger
         for (var i = 0; i < cityList.length; i++) {
@@ -71,8 +71,27 @@ app.post("/", (request, response) => {
 
         debugger
         // console.log("The suggestions:", usersSug)
-        response.json({ status: 200, search: usersSug })
-        // response.status(200).send({search: usersSug})
+        response.json({ status: 200, search: usersSug})
+        // request.session.search = allContent
+        // response.redirect("/event/activityList")
+        // console.log("searchData2: ", allContent)
+        // const messageQuery = {
+        //     text: ` SELECT * FROM activities WHERE city = '${allContent}';`
+        // }
+        // // ('${allContent}')
+        // if(req.session.user) {
+        //     client.query(messageQuery, function (err, response) {
+        //         if (err) throw err;
+        //         var activities = response.rows
+        //         console.log("activities: ", activities)
+        //         res.render('activityList', {
+        //             user:req.session.user,
+        //             search: req.session.search,
+        //             activities: activities
+        //         })
+        //     })    
+            
+        // }
     });
 })
 

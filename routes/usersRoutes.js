@@ -99,7 +99,7 @@ router.post("/login", (req, res) => {
                         id: response.rows[0].id
                         } 
                         console.log("this is activity: ")
-                    res.render('profile', {
+                    res.render('index', {
                         user:req.session.user
                     })
                 } else {

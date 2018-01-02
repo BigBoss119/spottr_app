@@ -33,36 +33,33 @@ router.post("/createActivity", (req, res) => {
     var city = req.body.city
     console.log(req.session.user.username)
     const insertquery = {
-        text: `INSERT INTO activities (activity, meetpoint, description, date, time, city, user_id) 
+        text: `INSERT INTO activities (activity, meetpoint, date, time, city, user_id) 
         values 
-        ('${activity}','${meetpoint}','${description}','${date}','${time}','${city}', 
-        (SELECT users.id FROM users WHERE username = '${req.session.user.username}'));`
+        ('${activity}','${meetpoint}','${date}','${time}','${city}', 
+        (SELECT users.id FROM users WHERE username = '${req.session.user.username}')) RETURNING *;`
     }
     console.log("This is: " + req.session.user.username)
     client.query(insertquery, function (err, response) { 
         if(err) {
             console.log("ERROR", err)
         }
+        var activities = response.rows
+        console.log(activities)
         res.render('activityList',{ 
             user:req.session.user,
-            activity: activities
+            activities: activities
         })
        // res.redirect('/user/profile')
         })
 })
 
 router.get("/activityList", (req, res) => {
-    res.render('activityList', {
-        user:req.session.user
-    })
-})
-
-router.post("/activityList", (req, res) => {
-    var allContent = req.body.searchData
-    console.log("searchData: ", allContent)
+    var search = req.session.search
+    console.log("searchData: ", search)
     const messageQuery = {
-        text: ` SELECT * FROM activities WHERE city = ('${allContent}');`
+        text: ` SELECT * FROM activities WHERE city = '${search}';`
     }
+    // ('${allContent}')
     if(req.session.user) {
         client.query(messageQuery, function (err, response) {
             if (err) throw err;
@@ -70,10 +67,39 @@ router.post("/activityList", (req, res) => {
             console.log("activities: ", activities)
             res.render('activityList', {
                 user:req.session.user,
+                search: req.session.search,
                 activities: activities
             })
         })    
         
     }
 })
+//     res.render('activityList', {
+//         user:req.session.user
+//     })
+// })
+
+router.post("/activityList", (req, res) => {
+    var allContent = req.body.searchData
+    req.session.search = allContent
+    console.log("searchData2: ", allContent)
+    const messageQuery = {
+        text: ` SELECT * FROM activities WHERE city = '${allContent}';`
+    }
+    // ('${allContent}')
+    if(req.session.user) {
+        client.query(messageQuery, function (err, response) {
+            if (err) throw err;
+            var activities = response.rows
+            console.log("activities: ", activities)
+            res.render('activityList', {
+                user:req.session.user,
+                search: req.session.search,
+                activities: activities
+            })
+        })    
+        
+    }
+})
+    
 module.exports = router;
