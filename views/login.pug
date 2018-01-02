@@ -31,18 +31,60 @@ html
 			#send{
 				width:30%;
 			}
+			.user{
+				float: left;
+				width: 50%;
+			}
+			.user2{ 
+				float: right;
+				margin-left: 15px;
+			}
 			
 		body
 			include header.pug
-			
-			h1 Log in to see the posts.
-			form(class="forms" method="POST" action="/user/login")
-				br
-				|
-				input(type="text" placeholder="username" name="username") 
-				br
-				|
-				input(type="password" placeholder="password" name="password")
-				br
-				input(type="submit" id="send" value="Login!")
+			div(class="user")
+				h1 Log in to see the posts.
+				form(class="forms" method="POST" action="/user/login")
+					br
+					|
+					input(type="text" placeholder="username" name="username") 
+					br
+					|
+					input(type="password" placeholder="password" name="password")
+					br
+					input(type="submit" id="send" value="Login!")
+			div(class="user2")
+				h1 Or Sign up to create an activity
+				form(class="forms" method="POST" action="/signup")
+					br
+					|
+					p Enter a Username: 
+					input(type="text" placeholder="Username" name="username")
+					br
+					|
+					p Enter an email address: 
+					input(type="text" placeholder="Email" name="email")
+					br
+					|
+					p Enter a password: 
+					input(type="password" placeholder="Password" id="password" name="password")
+					br
+					|
+					p Confirm password: 
+					input(type="password" placeholder="Confirm password" id="password2" name="password2")
+					br
+					input(type="submit" value="Signup!")
+			script.
+				$(document).ready(function() {
+					$(".forms").submit(function(event){
+						const pass = $("#password").val()
+						console.log(pass) 
+						const passCheck = $("#password2").val()
+						console.log(passCheck) 
+						if(pass !== passCheck) {
+							event.preventDefault()
+							alert("Password does not match")
+						}
+					})
+				})
 		include footer.pug

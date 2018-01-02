@@ -62,7 +62,6 @@ app.post("/", (request, response) => {
         var allContent = request.body.searchData
         console.log("searchData1: ", allContent)
         var usersSug = []
-        debugger
         for (var i = 0; i < cityList.length; i++) {
             if (allContent.toLowerCase() === cityList[i].name.slice(0, allContent.length).toLowerCase() || allContent.toLowerCase() === cityList[i].country.slice(0, allContent.length).toLowerCase()) {
                 usersSug.push(cityList[i].name + ", " + cityList[i].country)
@@ -70,7 +69,6 @@ app.post("/", (request, response) => {
         }
         console.log("im here")
 
-        debugger
         // console.log("The suggestions:", usersSug)
         response.json({ status: 200, search: usersSug})
     });

@@ -102,6 +102,8 @@ router.post("/login", (req, res) => {
                     res.render('index', {
                         user:req.session.user
                     })
+                } else if (!req.session.user) { 
+                    res.redirect('/signup')
                 } else {
                     res.send("Wrong password")
                 }

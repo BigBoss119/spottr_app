@@ -30,8 +30,8 @@ html
 	include header.pug
 
 	div
-		div(class='hBlock') 
-			form(method='POST' action="/event/activityList" class='formField')
+		div(class="hBlock") 
+			form(class="formField")
 				img(src="images/texthomepage.png" id="texthp")
 				input(type='text' id='searchBar' placeholder='Where do you want to meet up?' name='title')
 				p(id='slogan') Because memories are made together.
@@ -48,30 +48,39 @@ html
 		$(document).ready(function() {
 			console.log ("Ready")
 			var timeOut = Date.now()
+
+			 $('form').on('submit', function(e){
+				var peter = $("#searchBar").val()			    
+		      e.preventDefault(); /*prevents default of the form*/
+		      console.log("cheeeeck")
+			   $.ajax({ /*AJAX for event popup, sends to activityList POST route*/
+					type: "POST",
+					url:"/event/activityList",
+					data:  {searchData: peter},
+					success: function(result){ /*only if city matches DB 'city, it shows activities table'*/
+						console.log("yeeeeea") /*when reached success, Ajax loads */	
+						$.each(result, function(index, value){
+							//console.log("values: " + value)
+							$("#search").append(`<p>${value}<p>`) /*shows data from dB*/
+						})			
+					},
+					error: function(error){
+						console.log("errorrrr", error)
+					}	
+				})
+			  });			
 			if (true){
 				timeOut =Date.now()
 				$("#searchBar").keyup(function(e) {
+				var peter = $("#searchBar").val()				
 				console.log(e.which)
-				var peter = $("#searchBar").val()
-				console.log(peter)
-				console.log("not Enter")
 					if (e.which == 13){
 						console.log("Press Enter" + e.which)
-						$.ajax({
-							type: "POST",
-							url:"/event/activityList",
-							data:  {searchData: peter},
-							success: function(result){
-								$.each(result, function(index, value){
-									$("#search").html(`<p>${value}<p>`)
-								})			
-							}	
-						})
-					}//if 13
-					else if (peter.length > 0) {
 						
+					}
+					else if (peter.length > 0) {
 						console.log("It works:" + peter)
-						$.ajax({
+						$.ajax({ /*AJAX for searchbar cities*/
 							type: "POST",
 							url: "/",
 							data: {searchData: peter},

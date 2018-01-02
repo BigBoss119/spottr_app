@@ -84,21 +84,22 @@ router.post("/activityList", (req, res) => {
     req.session.search = allContent
     console.log("searchData2: ", allContent)
     const messageQuery = {
-        text: ` SELECT * FROM activities WHERE city = '${allContent}';`
-    }
-    // ('${allContent}')
-    if(req.session.user) {
-        client.query(messageQuery, function (err, response) {
-            if (err) throw err;
+        text: `SELECT * FROM activities WHERE city LIKE '${allContent.slice(0, (allContent.length - 4))}%';`
+    } /* {allContent}% matches any values that starts with "allContent"*/
+    debugger
+/*    if(req.session.user) {
+*/        client.query(messageQuery, function (err, response) {
+            if (err) throw err;     
             var activities = response.rows
             console.log(allContent)
             console.log("activities: ", activities)
-            res.send(
+           debugger
+            res.json(
                activities
             )
         })    
         
-    }
+    //}
 })
     
 module.exports = router;
