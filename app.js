@@ -83,17 +83,32 @@ app.use('/event', events)
 
 /*--------------gets the list from Shell to index--------*/
 app.get("/", (req, res) => {
-    const readquery = {
-        text: `select * from activities;`
+    const readquery1 = {
+        text: `create table if not exists activities(
+        id serial primary key,
+        activity text,
+        meetpoint text,
+        date date,
+        time time,
+        city text,
+        user_id integer);`
     }
-    client.query(readquery, function(err, response) {
+
+   /* const readquery2 = {
+        text: `create table if not exists users(
+        id serial primary key,
+        username text,
+        email text,
+        password text);`
+    }*/
+    client.query(readquery1, /*readquery2*/ function(err, response) {
         /*not needed in 'get'
             only after location is typed in, it should load with ajax/jquery*/
-        var activity = response.rows
-        console.log("reached")
+        /*var activity = response.rows*/
+        console.log("reached: ")
         res.render('index', {
             user: req.session.user,
-            activity: activity
+            /*activity: activity*/
         })
     })
 })

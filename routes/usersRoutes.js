@@ -79,10 +79,10 @@ router.get("/login", (req, res) => {
 router.post("/login", (req, res) => {
     var username = req.body.username
     const loginQuery = {
-        text: ` SELECT * FROM users WHERE username = '${username}',
-        (SELECT * FROM activities WHERE users.id FROM users = '${req.session.user.username}');`
+        text: `SELECT * FROM users WHERE username = '${username}';`
 
-       // SELECT * FROM activities WHERE user_id = users.user_id
+       /*,SELECT * FROM activities WHERE user_id = users.user_id
+        SELECT * FROM activities WHERE users.id FROM users = '${req.session.user.username}')*/
     } 
     
     client.query(loginQuery, function (err, response) {
