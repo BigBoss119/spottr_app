@@ -5,6 +5,9 @@ html
 
 	title Welcome
 	style(type='text/css').
+		ul#navigation{
+		padding: 20px 0px 5px 0px;
+		}
 
 	body
 		a(href="/index")
@@ -12,7 +15,7 @@ html
 							
 		div(class="navbar")
 		nav
-			ul
+			ul(id='navigation')
 				li
 				a About
 				a How it works
@@ -26,7 +29,7 @@ html
 				li
 					if (user)
 						a(href="/user/profile")
-							img(src="/images/Nienke.jpg" id="userid")
+							img(src="/images/Nienke.png" id="userid")
 				li
 					if (user)
 						a(href="/event/createActivity") Create an event
