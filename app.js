@@ -104,8 +104,8 @@ app.get("/", (req, res) => {
     client.query(readquery1, /*readquery2*/ function(err, response) {
         /*not needed in 'get'
             only after location is typed in, it should load with ajax/jquery*/
-        /*var activity = response.rows*/
-        console.log("reached: ")
+        var activity = response.rows
+        console.log("reached: ", activity)
         res.render('index', {
             user: req.session.user,
             /*activity: activity*/

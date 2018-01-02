@@ -115,7 +115,7 @@ router.get("/profile", (req, res) => {
     console.log("This is: ", req.session.user)
     console.log("User_id: ", req.session.user.id)
     const profileQuery = {
-    //     text: `Select messages.title, messages.message FROM messages WHERE messages.user_id = ${req.session.user.id}`
+        text: `Select * from activities WHERE user_id = ${req.session.user.id}`
     } 
     
     if(req.session.user) {

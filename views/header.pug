@@ -5,6 +5,9 @@ html
 
 	title Welcome
 	style(type='text/css').
+		li{
+
+		}
 
 	body
 		img(src="/images/logo.png" id="logo")
@@ -14,6 +17,8 @@ html
 				//- img(src="images/logo.png" id="logo")
 				li
 					a(href="/" class="links") Home
+				a About
+				a How it works
 				li
 					if (user)
 						a(href="/user/profile")
