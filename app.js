@@ -41,7 +41,8 @@ app.get("/eventlist", (req, res) => {
 app.set('view engine', 'pug')//tells that the file its reading its in pug form
 app.set('views', __dirname + '/views');// this is where all the routes are
 app.use(express.static(__dirname + '/public')); //this is for all the images and css files
-
+app.use('/user', express.static('public'))
+app.use('/event', express.static('public'))
 
 app.use('/', bodyParser.urlencoded({ extended: true }));
 
