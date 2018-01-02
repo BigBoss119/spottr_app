@@ -13,7 +13,9 @@ html
 
 		#new{
 			padding: 5px 50px 5px 50px;
-			border: 5px dotted #4E6D56;
+			border: 2px solid #4E6D56;
+			width: 17%;
+			display: inline-block;
 		}
 
 		.title{
@@ -37,6 +39,8 @@ html
 
 		.fnav{
 		    margin: 180px -20px -25px -70px!important;
+		    position: absolute;
+		    bottom: 0;
 		}
 
 		
@@ -51,16 +55,17 @@ html
 			p
 			div.blog  
 			ul.title 
-				p #{item.activity}
+				p
+				|#{item.activity}
 			ul.message
-				p 
+				p
 				|#{item.city}
-				p 
+				p
 				|#{item.meetpoint}
 				p
-				| #{item.date} 
+				|#{item.date}
 				p
-				| #{item.time}
+				|#{item.time}
 
 
 		include footer.pug
