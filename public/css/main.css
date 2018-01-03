@@ -158,7 +158,6 @@ a{
 }
 
 /*Footer*/
-
 .footer{
   background-color: #4E6D56;
   position: absolute;
@@ -172,7 +171,7 @@ a{
   left: 0;
   width: -webkit-fill-available;
   text-align: center;
-  margin: 60px -20px -25px -70px;
+  margin: 60px -20px -70px;
 }
 
 .ftext{

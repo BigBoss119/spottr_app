@@ -18,16 +18,28 @@ html
 		.fnav{
 				bottom:0;
 			}
+			#create {
+			height: 5%;
+		}
+
+		.createEvent::after {
+			content: "Create New Event";
+			vertical-align: center;
+
+		}
+		.createEvent {	
+			float: right;
+		}
 
 	body
 		include header.pug
 
 		h1 Welcome: #{user.username} 
-			form(action="/images" method="POST" enctype="multipart/form-data" style="padding-top:25px;")
-				input(type="file" placeholder="Upload Picture" name="file")
-				input(type="submit" placeholder="submit" name="submit")
+			
 		p
-			a(href="/event/createActivity" class="links" id="new") Post a new message? 
+			a(href="/event/createActivity" class="links") 
+				div(class="createEvent")
+					img(src="/images/create.png" id="create")
 		h1.tOne Activities
 		each item in activities
 			p

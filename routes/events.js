@@ -19,9 +19,13 @@ const client = new Client({ //this locates the server on the computer
 client.connect()//this connects to the sesrver
 
 router.get("/createActivity", (req, res) => {
-    res.render('createActivity', {
-        user: req.session.user
-    })
+    debugger
+    if(!req.session.user) res.redirect("/user/login")
+    else {
+        res.render('createActivity', {
+            user: req.session.user
+        })
+    }
 })
 
 router.post("/createActivity", (req, res) => {
@@ -40,14 +44,10 @@ router.post("/createActivity", (req, res) => {
     }
     console.log("This is: " + req.session.user.username)
     client.query(insertquery, function (err, response) { 
-        if(err) {
-            console.log("ERROR", err)
-        }
-        var activities = response.rows
-        console.log(activities)
+        if(err) console.log("ERROR", err)
         res.render('activityList',{ 
             user:req.session.user,
-            activities: activities
+            activities: response.rows
         })
        // res.redirect('/user/profile')
         })
@@ -74,10 +74,7 @@ router.get("/activityList", (req, res) => {
         
     }
 })
-//     res.render('activityList', {
-//         user:req.session.user
-//     })
-// })
+
 /*-----searchbar----*/
 router.post("/activityList", (req, res) => {
     var allContent = req.body.searchData
@@ -91,8 +88,6 @@ router.post("/activityList", (req, res) => {
 */        client.query(messageQuery, function (err, response) {
             if (err) throw err;     
             var activities = response.rows
-            console.log(allContent)
-            console.log("activities: ", activities)
            debugger
             res.json(
                activities

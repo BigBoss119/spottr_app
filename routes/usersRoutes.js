@@ -12,41 +12,30 @@ const client = new Client({ //this locates the server on the computer
     password: process.env.password
 }) //then this client is the command connection to the server.
 
-
-
 client.connect()//this connects to the sesrver
 
 router.get("/signup", (req, res) => {
-    if(req.session.user) {
-        res.send("You are already logged in")
-    }
-    else {
-        res.render('signup')
-    }
+    if(req.session.user) res.send("You are already logged in")
+    else res.render('signup') 
 })
 
 router.post("/signup", (req, res) => {
     var username = req.body.username /*case insensitive*/
     var email = req.body.email /*case insensitive*/
     var password = req.body.password
-    console.log(password)
-    const userquery = {
-        text: `SELECT * FROM users WHERE username = '${username}'`
-    }
-    client.query(userquery)
+    client.query(`SELECT * FROM users WHERE username = '${username}'`)
         .then(result => {
             /*username, email taken*/
             if (result.rows.length !== 0) {
-                console.log("User: " + result.rows[0])
                 res.send("Username already taken")
-            } else {
+            }
+            else {
                 debugger
                 /*bcrypt password(hash and salt)*/
                 var salt = bcrypt.genSalt(10, function(err, salt) { /*you have to create the salt and then add it to the bcrypt*/
                     bcrypt.hash(`${req.body.password}`, salt, function(err, hash) {
                         client.query(`INSERT INTO users (username, email, password) values ('${username}','${email}','${hash}') RETURNING *;`)
                         .then(response => {
-                            console.log(response)
                             req.session.user = {
                                 username:  response.rows[0].username,
                                 id: response.rows[0].id
@@ -55,19 +44,15 @@ router.post("/signup", (req, res) => {
                         })
                         .catch(e=>{
                             console.log("ERRORsignup ", e)
-                        })
-                                               
+                        })                        
                     })
                 })
-                
             }
-
         })
         .catch(error => {
             console.log("You fucked up!!: " + error)
         })
 })
-
 
 /*login route*/
 router.get("/login", (req, res) => {
@@ -78,18 +63,12 @@ router.get("/login", (req, res) => {
 
 router.post("/login", (req, res) => {
     var username = req.body.username
-    const loginQuery = {
-        text: `SELECT * FROM users WHERE username = '${username}';`
-
-       /*,SELECT * FROM activities WHERE user_id = users.user_id
-        SELECT * FROM activities WHERE users.id FROM users = '${req.session.user.username}')*/
-    } 
-    
-    client.query(loginQuery, function (err, response) {
+    client.query( `SELECT * FROM users WHERE username = '${username}';`, function (err, response) {
         if (err) throw err
         if(response.rows.length === 0) {
             res.redirect('/user/signup')
-        } else {
+        } 
+        else {
             bcrypt.compare(req.body.password /*the typed password*/, response.rows[0].password /*password in DB*/, function(err, result) {
                 var activities = response.rows
                 if(err) throw err
@@ -97,32 +76,21 @@ router.post("/login", (req, res) => {
                     req.session.user = {
                         username:  response.rows[0].username,
                         id: response.rows[0].id
-                        } 
-                        console.log("this is activity: ")
+                    } 
                     res.render('index', {
                         user:req.session.user
                     })
-                } else if (!req.session.user) { 
-                    res.redirect('/signup')
-                } else {
-                    res.send("Wrong password")
-                }
-                
-                
-                });
+                } 
+                else if (!req.session.user) res.redirect('/signup')
+                else res.send("Wrong password")    
+            });
         }  
     })
 })
 
 router.get("/profile", (req, res) => {
-    console.log("This is: ", req.session.user)
-    console.log("User_id: ", req.session.user.id)
-    const profileQuery = {
-        text: `Select * from activities WHERE user_id = ${req.session.user.id}`
-    } 
-    
     if(req.session.user) {
-        client.query(profileQuery, function (err, response) {
+        client.query(`Select * from activities WHERE user_id = ${req.session.user.id}`, function (err, response) {
             if(err) throw err;
             var activities = response.rows
             console.log(activities)
@@ -134,15 +102,14 @@ router.get("/profile", (req, res) => {
     } 
     else {
         res.redirect('/user/signup')
-    }
-    
+    }  
 })
 
 /*logout route*/
 router.post("/logout", function (req, res) {
   req.session.destroy();
   console.log("Logged Out")
-  res.redirect('/');
+  res.render('index');
 });
 
 module.exports = router;

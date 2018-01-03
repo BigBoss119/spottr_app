@@ -1,7 +1,7 @@
 html
 	head
 		link(rel='stylesheet', href='/css/main.css', type='text/css')
-		script(type="text/javascript" src="index.js")
+		//- script(type="text/javascript" src="index.js")
 		script(src="https://code.jquery.com/jquery-3.2.1.js"
 				integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
 				crossorigin="anonymous")
@@ -42,14 +42,26 @@ html
 		    position: absolute;
 		    bottom: 0;
 		}
+		.createEvent::after {
+			content: "Create New Event";
+			vertical-align: center;
 
-		
+		}
+		#create {
+			height: 5%;
+		}
+		.createEvent {	
+			float: right;
+		}
 	body
 		include header.pug
 
 		h1 Welcome: #{user.username}
-		p
-			a(href="/event/createActivity" class="links" id="new") Create a new activity? 
+		p 
+			a(href="/event/createActivity" class="links") 
+				div(class="createEvent")
+					img(src="/images/create.png" id="create")
+
 		h1.tOne Activities
 		each item in activities
 			p
