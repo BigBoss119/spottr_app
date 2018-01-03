@@ -31,15 +31,15 @@ router.get("/createActivity", (req, res) => {
 router.post("/createActivity", (req, res) => {
     var activity = req.body.activity
     var meetpoint = req.body.meetpoint
-    var description = req.body.description
+    var todo = req.body.description
     var date = req.body.date
     var time = req.body.time
     var city = req.body.city
     console.log(req.session.user.username)
     const insertquery = {
-        text: `INSERT INTO activities (activity, meetpoint, date, time, city, user_id) 
+        text: `INSERT INTO activities (activity, meetpoint, todo, date, time, city, user_id) 
         values 
-        ('${activity}','${meetpoint}','${date}','${time}','${city}', 
+        ('${activity}','${meetpoint}','${todo}','${date}','${time}','${city}', 
         (SELECT users.id FROM users WHERE username = '${req.session.user.username}')) RETURNING *;`
     }
     console.log("This is: " + req.session.user.username)

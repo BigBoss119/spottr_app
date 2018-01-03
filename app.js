@@ -25,6 +25,7 @@ client.query(
     id serial primary key,
     activity text,
     meetpoint text,
+    todo text,
     date date,
     time time,
     city text,
