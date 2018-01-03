@@ -20,9 +20,6 @@ html
 				a About
 				a How it works
 				li
-					if (user)
-						a(href="/event/activityList") See all activities #{search}
-				li
 					if (!user)
 						a(href="/user/login")
 							img(src="/images/user.png" id="userid")
@@ -30,10 +27,6 @@ html
 					if (user)
 						a(href="/user/profile")
 							img(src="/images/Nienke.png" id="userid")
-				li
-					if (user)
-						a(href="/event/createActivity") Create an event
-				
 				li
 					if (user)
 						form(class="forms" method="POST" action="/user/logout")
